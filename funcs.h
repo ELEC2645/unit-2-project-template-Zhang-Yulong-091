@@ -8,4 +8,4 @@ void menu_circuit(void);
 void menu_calculator(void);
 void menu_query_assistant(void);
 
-#endif#pragma once
+#endif // FUNCS_H

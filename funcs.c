@@ -28,16 +28,16 @@ static int read_int_min(const char* prompt, int min)
     int rc;
 
     for (;;) {
-        printf_s("%s", prompt);
-        rc = scanf_s("%d", &value);
+        printf("%s", prompt);
+        rc = scanf("%d", &value);
         if (rc != 1) {
-            printf_s("Invalid input. Please enter an integer.\n");
+            printf("Invalid input. Please enter an integer.\n");
             clear_input_buffer();
             continue;
         }
         clear_input_buffer();
         if (value < min) {
-            printf_s("Value must be at least %d.\n", min);
+            printf("Value must be at least %d.\n", min);
             continue;
         }
         return value;
@@ -51,16 +51,16 @@ static int read_int_range(const char* prompt, int min, int max)
     int rc;
 
     for (;;) {
-        printf_s("%s", prompt);
-        rc = scanf_s("%d", &value);
+        printf("%s", prompt);
+        rc = scanf("%d", &value);
         if (rc != 1) {
-            printf_s("Invalid input. Please enter an integer.\n");
+            printf("Invalid input. Please enter an integer.\n");
             clear_input_buffer();
             continue;
         }
         clear_input_buffer();
         if (value < min || value > max) {
-            printf_s("Value must be between %d and %d.\n", min, max);
+            printf("Value must be between %d and %d.\n", min, max);
             continue;
         }
         return value;
@@ -74,10 +74,10 @@ static double read_double(const char* prompt)
     int rc;
 
     for (;;) {
-        printf_s("%s", prompt);
-        rc = scanf_s("%lf", &value);
+        printf("%s", prompt);
+        rc = scanf("%lf", &value);
         if (rc != 1) {
-            printf_s("Invalid input. Please enter a number.\n");
+            printf("Invalid input. Please enter a number.\n");
             clear_input_buffer();
             continue;
         }
@@ -100,18 +100,18 @@ static void matrix_addition(void)
     rows = read_int_range("Enter number of rows (1-5): ", 1, MAX_ROWS);
     cols = read_int_range("Enter number of columns (1-5): ", 1, MAX_COLS);
 
-    printf_s("\nEnter elements of matrix A:\n");
+    printf("\nEnter elements of matrix A:\n");
     for (i = 0; i < rows; ++i) {
         for (j = 0; j < cols; ++j) {
-            sprintf_s(prompt, sizeof(prompt), "A[%d][%d] = ", i + 1, j + 1);
+            snprintf(prompt, sizeof(prompt), "A[%d][%d] = ", i + 1, j + 1);
             A[i][j] = read_double(prompt);
         }
     }
 
-    printf_s("\nEnter elements of matrix B:\n");
+    printf("\nEnter elements of matrix B:\n");
     for (i = 0; i < rows; ++i) {
         for (j = 0; j < cols; ++j) {
-            sprintf_s(prompt, sizeof(prompt), "B[%d][%d] = ", i + 1, j + 1);
+            snprintf(prompt, sizeof(prompt), "B[%d][%d] = ", i + 1, j + 1);
             B[i][j] = read_double(prompt);
         }
     }
@@ -122,11 +122,11 @@ static void matrix_addition(void)
         }
     }
 
-    printf_s("\nResult of A + B:\n");
+    printf("\nResult of A + B:\n");
     for (i = 0; i < rows; ++i) {
         for (j = 0; j < cols; ++j)
-            printf_s("%8.3f ", C[i][j]);
-        printf_s("\n");
+            printf("%8.3f ", C[i][j]);
+        printf("\n");
     }
 }
 
@@ -142,18 +142,18 @@ static void matrix_subtraction(void)
     rows = read_int_range("Enter number of rows (1-5): ", 1, MAX_ROWS);
     cols = read_int_range("Enter number of columns (1-5): ", 1, MAX_COLS);
 
-    printf_s("\nEnter elements of matrix A:\n");
+    printf("\nEnter elements of matrix A:\n");
     for (i = 0; i < rows; ++i) {
         for (j = 0; j < cols; ++j) {
-            sprintf_s(prompt, sizeof(prompt), "A[%d][%d] = ", i + 1, j + 1);
+            snprintf(prompt, sizeof(prompt), "A[%d][%d] = ", i + 1, j + 1);
             A[i][j] = read_double(prompt);
         }
     }
 
-    printf_s("\nEnter elements of matrix B:\n");
+    printf("\nEnter elements of matrix B:\n");
     for (i = 0; i < rows; ++i) {
         for (j = 0; j < cols; ++j) {
-            sprintf_s(prompt, sizeof(prompt), "B[%d][%d] = ", i + 1, j + 1);
+            snprintf(prompt, sizeof(prompt), "B[%d][%d] = ", i + 1, j + 1);
             B[i][j] = read_double(prompt);
         }
     }
@@ -164,11 +164,11 @@ static void matrix_subtraction(void)
         }
     }
 
-    printf_s("\nResult of A - B:\n");
+    printf("\nResult of A - B:\n");
     for (i = 0; i < rows; ++i) {
         for (j = 0; j < cols; ++j)
-            printf_s("%8.3f ", C[i][j]);
-        printf_s("\n");
+            printf("%8.3f ", C[i][j]);
+        printf("\n");
     }
 }
 
@@ -184,21 +184,21 @@ static void matrix_multiplication(void)
     r1 = read_int_range("Enter number of rows of A (1-5): ", 1, MAX_ROWS);
     c1 = read_int_range("Enter number of columns of A (1-5): ", 1, MAX_COLS);
 
-    printf_s("For multiplication, matrix B must have %d rows.\n", c1);
+    printf("For multiplication, matrix B must have %d rows.\n", c1);
     c2 = read_int_range("Enter number of columns of B (1-5): ", 1, MAX_COLS);
 
-    printf_s("\nEnter elements of matrix A:\n");
+    printf("\nEnter elements of matrix A:\n");
     for (i = 0; i < r1; ++i) {
         for (j = 0; j < c1; ++j) {
-            sprintf_s(prompt, sizeof(prompt), "A[%d][%d] = ", i + 1, j + 1);
+            snprintf(prompt, sizeof(prompt), "A[%d][%d] = ", i + 1, j + 1);
             A[i][j] = read_double(prompt);
         }
     }
 
-    printf_s("\nEnter elements of matrix B:\n");
+    printf("\nEnter elements of matrix B:\n");
     for (i = 0; i < c1; ++i) {      /* rows of B = columns of A = c1 */
         for (j = 0; j < c2; ++j) {
-            sprintf_s(prompt, sizeof(prompt), "B[%d][%d] = ", i + 1, j + 1);
+            snprintf(prompt, sizeof(prompt), "B[%d][%d] = ", i + 1, j + 1);
             B[i][j] = read_double(prompt);
         }
     }
@@ -212,11 +212,11 @@ static void matrix_multiplication(void)
         }
     }
 
-    printf_s("\nResult of A * B:\n");
+    printf("\nResult of A * B:\n");
     for (i = 0; i < r1; ++i) {
         for (j = 0; j < c2; ++j)
-            printf_s("%8.3f ", C[i][j]);
-        printf_s("\n");
+            printf("%8.3f ", C[i][j]);
+        printf("\n");
     }
 }
 
@@ -231,10 +231,10 @@ static void matrix_determinant(void)
 
     n = read_int_range("Enter matrix size n (1-3, for n x n): ", 1, 3);
 
-    printf_s("\nEnter elements of matrix (%d x %d):\n", n, n);
+    printf("\nEnter elements of matrix (%d x %d):\n", n, n);
     for (i = 0; i < n; ++i) {
         for (j = 0; j < n; ++j) {
-            sprintf_s(prompt, sizeof(prompt), "M[%d][%d] = ", i + 1, j + 1);
+            snprintf(prompt, sizeof(prompt), "M[%d][%d] = ", i + 1, j + 1);
             M[i][j] = read_double(prompt);
         }
     }
@@ -256,7 +256,7 @@ static void matrix_determinant(void)
             + c * (d * h - e * g);
     }
 
-    printf_s("\nDeterminant = %.6f\n", det);
+    printf("\nDeterminant = %.6f\n", det);
 }
 
 void menu_linear_algebra(void)
@@ -264,13 +264,13 @@ void menu_linear_algebra(void)
     int choice;
 
     for (;;) {
-        printf_s("\n===== Linear Algebra Library =====\n");
-        printf_s("1. Matrix addition\n");
-        printf_s("2. Matrix subtraction\n");
-        printf_s("3. Matrix multiplication\n");
-        printf_s("4. Determinant (up to 3x3)\n");
-        printf_s("5. Exit to main menu\n");
-        printf_s("==================================\n");
+        printf("\n===== Linear Algebra Library =====\n");
+        printf("1. Matrix addition\n");
+        printf("2. Matrix subtraction\n");
+        printf("3. Matrix multiplication\n");
+        printf("4. Determinant (up to 3x3)\n");
+        printf("5. Exit to main menu\n");
+        printf("==================================\n");
 
         choice = read_int_range("Select item: ", 1, 5);
 
@@ -370,42 +370,42 @@ void menu_statistics(void)
 
     n = read_int_range("Enter number of data points (1-100): ", 1, MAX_DATA);
 
-    printf_s("\nEnter %d data values:\n", n);
+    printf("\nEnter %d data values:\n", n);
     for (i = 0; i < n; ++i) {
-        sprintf_s(prompt, sizeof(prompt), "x[%d] = ", i + 1);
+        snprintf(prompt, sizeof(prompt), "x[%d] = ", i + 1);
         data[i] = read_double(prompt);
     }
 
     for (;;) {
-        printf_s("\n===== Basic Statistical Tools =====\n");
-        printf_s("1. Mean\n");
-        printf_s("2. Median\n");
-        printf_s("3. Variance (population)\n");
-        printf_s("4. Standard deviation (population)\n");
-        printf_s("5. Exit to main menu\n");
-        printf_s("===================================\n");
+        printf("\n===== Basic Statistical Tools =====\n");
+        printf("1. Mean\n");
+        printf("2. Median\n");
+        printf("3. Variance (population)\n");
+        printf("4. Standard deviation (population)\n");
+        printf("5. Exit to main menu\n");
+        printf("===================================\n");
 
         choice = read_int_range("Select item: ", 1, 5);
 
         switch (choice) {
         case 1: {
             double mean = compute_mean(data, n);
-            printf_s("Mean = %.6f\n", mean);
+            printf("Mean = %.6f\n", mean);
             break;
         }
         case 2: {
             double median = compute_median(data, n);
-            printf_s("Median = %.6f\n", median);
+            printf("Median = %.6f\n", median);
             break;
         }
         case 3: {
             double var = compute_variance(data, n);
-            printf_s("Variance = %.6f\n", var);
+            printf("Variance = %.6f\n", var);
             break;
         }
         case 4: {
             double sd = compute_stddev(data, n);
-            printf_s("Standard deviation = %.6f\n", sd);
+            printf("Standard deviation = %.6f\n", sd);
             break;
         }
         case 5:
@@ -423,11 +423,11 @@ static void compute_resistance(void)
     double current = read_double("Enter current (A): ");
 
     if (current == 0.0) {
-        printf_s("Current cannot be zero when computing resistance.\n");
+        printf("Current cannot be zero when computing resistance.\n");
         return;
     }
 
-    printf_s("Resistance R = V / I = %.6f ohms\n", voltage / current);
+    printf("Resistance R = V / I = %.6f ohms\n", voltage / current);
 }
 
 static void compute_voltage(void)
@@ -435,7 +435,7 @@ static void compute_voltage(void)
     double current = read_double("Enter current (A): ");
     double resistance = read_double("Enter resistance (ohms): ");
     double voltage = current * resistance;
-    printf_s("Voltage V = I * R = %.6f volts\n", voltage);
+    printf("Voltage V = I * R = %.6f volts\n", voltage);
 }
 
 static void compute_current(void)
@@ -444,11 +444,11 @@ static void compute_current(void)
     double resistance = read_double("Enter resistance (ohms): ");
 
     if (resistance == 0.0) {
-        printf_s("Resistance cannot be zero when computing current.\n");
+        printf("Resistance cannot be zero when computing current.\n");
         return;
     }
 
-    printf_s("Current I = V / R = %.6f amperes\n", voltage / resistance);
+    printf("Current I = V / R = %.6f amperes\n", voltage / resistance);
 }
 
 static void compute_total_resistance(void)
@@ -463,41 +463,41 @@ static void compute_total_resistance(void)
     n = read_int_min("Enter number of resistors (>=1): ", 1);
     R = (double*)malloc((size_t)n * sizeof(double));
     if (!R) {
-        printf_s("Memory allocation failed.\n");
+        printf("Memory allocation failed.\n");
         return;
     }
 
     for (i = 0; i < n; ++i) {
         char prompt[64];
-        sprintf_s(prompt, sizeof(prompt), "R[%d] (ohms) = ", i + 1);
+        snprintf(prompt, sizeof(prompt), "R[%d] (ohms) = ", i + 1);
         R[i] = read_double(prompt);
     }
 
-    printf_s("\n1. Series connection\n");
-    printf_s("2. Parallel connection\n");
+    printf("\n1. Series connection\n");
+    printf("2. Parallel connection\n");
     type = read_int_range("Select type: ", 1, 2);
 
     if (type == 1) {
         sum = 0.0;
         for (i = 0; i < n; ++i)
             sum += R[i];
-        printf_s("Total series resistance = %.6f ohms\n", sum);
+        printf("Total series resistance = %.6f ohms\n", sum);
     }
     else {
         inv_sum = 0.0;
         for (i = 0; i < n; ++i) {
             if (R[i] == 0.0) {
-                printf_s("Resistance value cannot be zero in a parallel network.\n");
+                printf("Resistance value cannot be zero in a parallel network.\n");
                 free(R);
                 return;
             }
             inv_sum += 1.0 / R[i];
         }
         if (inv_sum == 0.0) {
-            printf_s("Sum of reciprocals is zero. Cannot compute.\n");
+            printf("Sum of reciprocals is zero. Cannot compute.\n");
         }
         else {
-            printf_s("Total parallel resistance = %.6f ohms\n", 1.0 / inv_sum);
+            printf("Total parallel resistance = %.6f ohms\n", 1.0 / inv_sum);
         }
     }
 
@@ -509,13 +509,13 @@ void menu_circuit(void)
     int choice;
 
     for (;;) {
-        printf_s("\n===== Simple Electrical Circuit =====\n");
-        printf_s("1. Compute resistance (R = V / I)\n");
-        printf_s("2. Compute voltage (V = I * R)\n");
-        printf_s("3. Compute current (I = V / R)\n");
-        printf_s("4. Compute total resistance\n");
-        printf_s("5. Exit to main menu\n");
-        printf_s("=====================================\n");
+        printf("\n===== Simple Electrical Circuit =====\n");
+        printf("1. Compute resistance (R = V / I)\n");
+        printf("2. Compute voltage (V = I * R)\n");
+        printf("3. Compute current (I = V / R)\n");
+        printf("4. Compute total resistance\n");
+        printf("5. Exit to main menu\n");
+        printf("=====================================\n");
 
         choice = read_int_range("Select item: ", 1, 5);
 
@@ -545,18 +545,18 @@ static void simple_arithmetic_calculator(void)
 {
     char line[128];
 
-    printf_s("\nEnter expressions in the form: a op b\n");
-    printf_s("Supported operators: +  -  *  /\n");
-    printf_s("Type 'q' to return to the previous menu.\n\n");
+    printf("\nEnter expressions in the form: a op b\n");
+    printf("Supported operators: +  -  *  /\n");
+    printf("Type 'q' to return to the previous menu.\n\n");
 
     for (;;) {
         double a, b, result;
         char op;
         int valid;
 
-        printf_s("Expression: ");
+        printf("Expression: ");
         if (!fgets(line, sizeof(line), stdin)) {
-            printf_s("Input error.\n");
+            printf("Input error.\n");
             return;
         }
 
@@ -564,8 +564,8 @@ static void simple_arithmetic_calculator(void)
             return;
         }
 
-        if (sscanf_s(line, "%lf %c %lf", &a, &op, 1, &b) != 3) {
-            printf_s("Invalid format. Example: 3.5 * 2\n");
+        if (sscanf(line, "%lf %c %lf", &a, &op, &b) != 3) {
+            printf("Invalid format. Example: 3.5 * 2\n");
             continue;
         }
 
@@ -582,7 +582,7 @@ static void simple_arithmetic_calculator(void)
             break;
         case '/':
             if (b == 0.0) {
-                printf_s("Error: division by zero.\n");
+                printf("Error: division by zero.\n");
                 valid = 0;
             }
             else {
@@ -590,12 +590,12 @@ static void simple_arithmetic_calculator(void)
             }
             break;
         default:
-            printf_s("Unsupported operator '%c'. Use + - * /.\n", op);
+            printf("Unsupported operator '%c'. Use + - * /.\n", op);
             valid = 0;
         }
 
         if (valid) {
-            printf_s("Result = %.10g\n", result);
+            printf("Result = %.10g\n", result);
         }
     }
 }
@@ -606,13 +606,13 @@ static void geometry_circle(void)
     double area, peri;
 
     if (r < 0) {
-        printf_s("Radius cannot be negative.\n");
+        printf("Radius cannot be negative.\n");
         return;
     }
     area = PI * r * r;
     peri = 2 * PI * r;
-    printf_s("Circle area = %.6f\n", area);
-    printf_s("Circle circumference = %.6f\n", peri);
+    printf("Circle area = %.6f\n", area);
+    printf("Circle circumference = %.6f\n", peri);
 }
 
 static void geometry_square(void)
@@ -621,13 +621,13 @@ static void geometry_square(void)
     double area, peri;
 
     if (a < 0) {
-        printf_s("Side length cannot be negative.\n");
+        printf("Side length cannot be negative.\n");
         return;
     }
     area = a * a;
     peri = 4 * a;
-    printf_s("Square area = %.6f\n", area);
-    printf_s("Square perimeter = %.6f\n", peri);
+    printf("Square area = %.6f\n", area);
+    printf("Square perimeter = %.6f\n", peri);
 }
 
 static void geometry_rectangle(void)
@@ -637,13 +637,13 @@ static void geometry_rectangle(void)
     double area, peri;
 
     if (w < 0 || h < 0) {
-        printf_s("Width and height cannot be negative.\n");
+        printf("Width and height cannot be negative.\n");
         return;
     }
     area = w * h;
     peri = 2 * (w + h);
-    printf_s("Rectangle area = %.6f\n", area);
-    printf_s("Rectangle perimeter = %.6f\n", peri);
+    printf("Rectangle area = %.6f\n", area);
+    printf("Rectangle perimeter = %.6f\n", peri);
 }
 
 static void geometry_sector(void)
@@ -653,11 +653,11 @@ static void geometry_sector(void)
     double area, arc, peri;
 
     if (r < 0) {
-        printf_s("Radius cannot be negative.\n");
+        printf("Radius cannot be negative.\n");
         return;
     }
     if (angle < 0) {
-        printf_s("Angle cannot be negative.\n");
+        printf("Angle cannot be negative.\n");
         return;
     }
 
@@ -665,9 +665,9 @@ static void geometry_sector(void)
     arc = 2 * PI * r * (angle / 360.0);
     peri = 2 * r + arc;
 
-    printf_s("Sector area = %.6f\n", area);
-    printf_s("Sector arc length = %.6f\n", arc);
-    printf_s("Sector perimeter = %.6f\n", peri);
+    printf("Sector area = %.6f\n", area);
+    printf("Sector arc length = %.6f\n", arc);
+    printf("Sector perimeter = %.6f\n", peri);
 }
 
 static void geometry_calculator(void)
@@ -675,13 +675,13 @@ static void geometry_calculator(void)
     int choice;
 
     for (;;) {
-        printf_s("\n===== Geometry Calculator =====\n");
-        printf_s("1. Circle (area & circumference)\n");
-        printf_s("2. Square (area & perimeter)\n");
-        printf_s("3. Rectangle (area & perimeter)\n");
-        printf_s("4. Sector (area, arc length & perimeter)\n");
-        printf_s("5. Exit to previous menu\n");
-        printf_s("================================\n");
+        printf("\n===== Geometry Calculator =====\n");
+        printf("1. Circle (area & circumference)\n");
+        printf("2. Square (area & perimeter)\n");
+        printf("3. Rectangle (area & perimeter)\n");
+        printf("4. Sector (area, arc length & perimeter)\n");
+        printf("5. Exit to previous menu\n");
+        printf("================================\n");
 
         choice = read_int_range("Select item: ", 1, 5);
 
@@ -710,11 +710,11 @@ void menu_calculator(void)
     int choice;
 
     for (;;) {
-        printf_s("\n===== Simple Calculator =====\n");
-        printf_s("1. Simple arithmetic calculator\n");
-        printf_s("2. Geometry information calculator\n");
-        printf_s("3. Exit to main menu\n");
-        printf_s("================================\n");
+        printf("\n===== Simple Calculator =====\n");
+        printf("1. Simple arithmetic calculator\n");
+        printf("2. Geometry information calculator\n");
+        printf("3. Exit to main menu\n");
+        printf("================================\n");
 
         choice = read_int_range("Select item: ", 1, 3);
 
@@ -740,13 +740,13 @@ void menu_query_assistant(void)
     char answer;
 
     for (;;) {
-        printf_s("\n===== Query Assistant =====\n");
-        printf_s("1. Matrix operations\n");
-        printf_s("2. Statistical data tools\n");
-        printf_s("3. Voltage, current and resistance\n");
-        printf_s("4. Arithmetic and geometry calculations\n");
-        printf_s("5. Exit to main menu\n");
-        printf_s("===========================\n");
+        printf("\n===== Query Assistant =====\n");
+        printf("1. Matrix operations\n");
+        printf("2. Statistical data tools\n");
+        printf("3. Voltage, current and resistance\n");
+        printf("4. Arithmetic and geometry calculations\n");
+        printf("5. Exit to main menu\n");
+        printf("===========================\n");
 
         choice = read_int_range("Select item: ", 1, 5);
 
@@ -756,50 +756,50 @@ void menu_query_assistant(void)
 
         switch (choice) {
         case 1:
-            printf_s("\nMatrix operations module includes:\n");
-            printf_s(" - Matrix addition\n");
-            printf_s(" - Matrix subtraction\n");
-            printf_s(" - Matrix multiplication\n");
-            printf_s(" - Determinant (up to 3x3)\n");
-            printf_s("Open this module now? (y/n): ");
-            scanf_s(" %c", &answer, 1);
+            printf("\nMatrix operations module includes:\n");
+            printf(" - Matrix addition\n");
+            printf(" - Matrix subtraction\n");
+            printf(" - Matrix multiplication\n");
+            printf(" - Determinant (up to 3x3)\n");
+            printf("Open this module now? (y/n): ");
+            scanf(" %c", &answer);
             clear_input_buffer();
             if (answer == 'y' || answer == 'Y') {
                 menu_linear_algebra();
             }
             break;
         case 2:
-            printf_s("\nBasic statistical tools module includes:\n");
-            printf_s(" - Mean\n");
-            printf_s(" - Median\n");
-            printf_s(" - Variance\n");
-            printf_s(" - Standard deviation\n");
-            printf_s("Open this module now? (y/n): ");
-            scanf_s(" %c", &answer, 1);
+            printf("\nBasic statistical tools module includes:\n");
+            printf(" - Mean\n");
+            printf(" - Median\n");
+            printf(" - Variance\n");
+            printf(" - Standard deviation\n");
+            printf("Open this module now? (y/n): ");
+            scanf(" %c", &answer);
             clear_input_buffer();
             if (answer == 'y' || answer == 'Y') {
                 menu_statistics();
             }
             break;
         case 3:
-            printf_s("\nSimple electrical circuit module includes:\n");
-            printf_s(" - Compute resistance\n");
-            printf_s(" - Compute voltage\n");
-            printf_s(" - Compute current\n");
-            printf_s(" - Compute total resistance (series/parallel)\n");
-            printf_s("Open this module now? (y/n): ");
-            scanf_s(" %c", &answer, 1);
+            printf("\nSimple electrical circuit module includes:\n");
+            printf(" - Compute resistance\n");
+            printf(" - Compute voltage\n");
+            printf(" - Compute current\n");
+            printf(" - Compute total resistance (series/parallel)\n");
+            printf("Open this module now? (y/n): ");
+            scanf(" %c", &answer);
             clear_input_buffer();
             if (answer == 'y' || answer == 'Y') {
                 menu_circuit();
             }
             break;
         case 4:
-            printf_s("\nSimple calculator module includes:\n");
-            printf_s(" - Arithmetic calculator (a op b)\n");
-            printf_s(" - Geometry calculator (area & perimeter)\n");
-            printf_s("Open this module now? (y/n): ");
-            scanf_s(" %c", &answer, 1);
+            printf("\nSimple calculator module includes:\n");
+            printf(" - Arithmetic calculator (a op b)\n");
+            printf(" - Geometry calculator (area & perimeter)\n");
+            printf("Open this module now? (y/n): ");
+            scanf(" %c", &answer);
             clear_input_buffer();
             if (answer == 'y' || answer == 'Y') {
                 menu_calculator();
