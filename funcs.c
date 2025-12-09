@@ -550,7 +550,7 @@ static void simple_arithmetic_calculator(void)
     printf("Type 'q' to return to the previous menu.\n\n");
 
     for (;;) {
-        double a, b, result;
+        double a = 0.0, b = 0.0, result = 0.0;
         char op;
         int valid;
 
