@@ -1,9 +1,11 @@
 #ifndef FUNCS_H
 #define FUNCS_H
 
-void menu_item_1(void);
-void menu_item_2(void);
-void menu_item_3(void);
-void menu_item_4(void);
+/* Prototypes for main menu items (implemented in funcs.c) */
+void menu_linear_algebra(void);
+void menu_statistics(void);
+void menu_circuit(void);
+void menu_calculator(void);
+void menu_query_assistant(void);
 
-#endif
+#endif#pragma once
